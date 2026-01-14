@@ -1,12 +1,21 @@
 // rafce
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LayoutContainer from "./layouts/LayoutContainer";
 import MainBox from "./components/MainBox";
 import SideBar from "./components/Sidebar";
 import TodoMain from "./components/TodoMain";
 
 const App = () => {
-  const [todos, setTodos] = useState([]);
+  // initialization: read todos from localStorage
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = localStorage.getItem("my_todo_list");
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
+
+  // save achive automatically: when todos changes
+  useEffect(() => {
+    localStorage.setItem("my_todo_list", JSON.stringify(todos));
+  }, [todos]);
 
   const addTodo = (text) => {
     const newTodo = {
