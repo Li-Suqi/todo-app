@@ -1,52 +1,52 @@
 import React from "react";
 
-const DateList = () => {
-  // 模拟最近10天的日期
-  const dates = Array.from({ length: 10 }).map((_, i) => {
-    const d = new Date();
-    d.setDate(d.getDate() - i);
-    return {
-      fullDate: d.toLocaleDateString(),
-      day: d.getDate(),
-      month: d.getMonth() + 1,
-      isToday: i === 0,
-    };
-  });
+const DateList = ({ todos, selectedDate, setSelectedDate }) => {
+  const datesWithTasks = [...new Set(todos.map((todo) => todo.date))]
+    .sort()
+    .reverse();
+
+  const recentDates = datesWithTasks.slice(0, 7);
 
   return (
     <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
-      <h3 className="text-sm font-semibold text-slate-500 mb-4 px-2">
-        History
-      </h3>
-
       <div className="space-y-2">
-        {dates.map((item, i) => (
-          <div
-            key={i}
-            className={`group p-3 rounded-2xl cursor-pointer transition-all ${
-              item.isToday
-                ? "bg-amber-100 text-slate-500 shadow-md shadow-orange-100"
-                : "hover:bg-slate-50 text-slate-500"
-            }`}
-          >
-            <div className="flex justify-between items-center">
-              <div>
-                <p className="text-xs text-slate-400">{item.month}月</p>
-                <p className="text-lg font-bold">{item.day}日</p>
+        {recentDates.map((date) => {
+          // task number
+          const dayTasks = todos.filter((t) => t.date === date);
+          const count = dayTasks.length;
+
+          const day = date.split("-")[2];
+          const isSelected = date === selectedDate;
+          return (
+            <div
+              key={date}
+              onClick={() => setSelectedDate(date)}
+              className={`flex items-center justify-between p-4 rounded-2xl cursor-pointer transition-all group
+                  ${
+                    isSelected
+                      ? "bg-amber-50 border-amber-200 shadow-sm" // selected
+                      : "bg-slate-50/50 border-transparent hover:border-amber-100" // normal and hover
+                  }
+                  border
+                `}
+            >
+              <div className="flex items-baseline gap-1">
+                <span className="text-slate-400 text-xs">
+                  {new Date(date).toLocaleDateString("en-US", {
+                    month: "short",
+                  })}
+                </span>
+                <span className="text-slate-700 font-bold text-lg">
+                  {parseInt(day)}
+                </span>
               </div>
-              {/* 右侧的小数字，显示当天任务数 */}
-              <span
-                className={`text-[10px] px-2 py-1 rounded-full ${
-                  item.isToday
-                    ? "bg-amber-300 text-slate-400"
-                    : "bg-slate-100 text-slate-400"
-                }`}
-              >
-                7 tasks
-              </span>
+
+              <div className="bg-amber-100/50 text-amber-600 px-3 py-1 rounded-full text-xs font-medium">
+                {count} tasks
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

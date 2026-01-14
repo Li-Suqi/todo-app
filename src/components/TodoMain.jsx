@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import TodoItem from "./TodoItem";
 
-const TodoMain = ({ todos, addTodo, toggleTodo, deleteTodo, updateTodo }) => {
+const TodoMain = ({
+  todos,
+  addTodo,
+  toggleTodo,
+  deleteTodo,
+  updateTodo,
+  selectedDate,
+}) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -17,7 +24,11 @@ const TodoMain = ({ todos, addTodo, toggleTodo, deleteTodo, updateTodo }) => {
       {/* header: show date */}
       <header className="p-8 pb-4">
         <h1 className="text-2xl font-semibold text-slate-700">
-          2026/1/13 Tuesday
+          {new Date(selectedDate).toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })}
         </h1>
       </header>
 

@@ -4,8 +4,10 @@ import LayoutContainer from "./layouts/LayoutContainer";
 import MainBox from "./components/MainBox";
 import SideBar from "./components/Sidebar";
 import TodoMain from "./components/TodoMain";
+import { formatLocalDate } from "./utils";
 
 const App = () => {
+  const [selectedDate, setSelectedDate] = useState(formatLocalDate(new Date()));
   // initialization: read todos from localStorage
   const [todos, setTodos] = useState(() => {
     const savedTodos = localStorage.getItem("my_todo_list");
@@ -22,7 +24,7 @@ const App = () => {
       id: Date.now().toString(),
       text: text,
       completed: false,
-      date: new Date().toISOString().split("T")[0], //get YYYY-MM-DD of today
+      date: selectedDate, //use YYYY-MM-DD of selectedDate
       createdAt: Date.now(),
     };
     setTodos([newTodo, ...todos]);
@@ -46,13 +48,21 @@ const App = () => {
     );
   };
 
+  // only show filtered todos in TodoMain
+  const filteredTodos = todos.filter((t) => t.date === selectedDate);
+
   return (
     <>
       <LayoutContainer>
         <MainBox>
-          <SideBar />
-          <TodoMain
+          <SideBar
             todos={todos}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+          />
+          <TodoMain
+            todos={filteredTodos}
+            selectedDate={selectedDate}
             addTodo={addTodo}
             toggleTodo={toggleTodo}
             deleteTodo={deleteTodo}
