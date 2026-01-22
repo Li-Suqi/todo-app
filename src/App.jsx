@@ -4,7 +4,7 @@ import LayoutContainer from "./layouts/LayoutContainer";
 import MainBox from "./components/MainBox";
 import SideBar from "./components/Sidebar";
 import TodoMain from "./components/TodoMain";
-import { formatLocalDate } from "./utils";
+import { fireBigConfetti, fireSmallConfetti, formatLocalDate } from "./utils";
 
 // default user info
 const DEFAULT_PROFILE = {
@@ -48,11 +48,31 @@ const App = () => {
   };
 
   const toggleTodo = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
-      ),
-    );
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        const newStatus = !todo.completed;
+
+        // task from not completed to completed
+        if (newStatus) {
+          // check task of this day
+          const dayTasks = todos.filter((t) => t.date === todo.date);
+          const otherTasksDone = dayTasks
+            .filter((t) => t.id !== id)
+            .every((t) => t.completed);
+
+          if (dayTasks.length > 0 && otherTasksDone) {
+            // if it's the last task of today
+            fireBigConfetti();
+          } else {
+            fireSmallConfetti();
+          }
+        }
+        return { ...todo, completed: newStatus };
+      }
+      return todo;
+    });
+
+    setTodos(updatedTodos);
   };
 
   const deleteTodo = (id) => {
