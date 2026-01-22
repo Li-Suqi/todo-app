@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import Heatmap from "./Heatmap";
 import DataList from "./DateList";
 import { formatLocalDate } from "../utils";
+import Profile from "./Profile";
 
-const Sidebar = ({ todos, selectedDate, setSelectedDate }) => {
+const Sidebar = ({
+  todos,
+  selectedDate,
+  setSelectedDate,
+  profile,
+  setProfile,
+}) => {
   const [viewDate, setViewDate] = useState(new Date()); // current month on the top of sidebar, today default
 
   const changeMonth = (offset) => {
@@ -11,7 +18,7 @@ const Sidebar = ({ todos, selectedDate, setSelectedDate }) => {
     const newDate = new Date(
       viewDate.getFullYear(),
       viewDate.getMonth() + offset,
-      1 // the 1st day
+      1, // the 1st day
     );
     setViewDate(newDate);
   };
@@ -45,6 +52,7 @@ const Sidebar = ({ todos, selectedDate, setSelectedDate }) => {
 
   return (
     <aside className="w-80 border-r border-slate-300 flex flex-col">
+      <Profile profile={profile} setProfile={setProfile} />
       <Heatmap
         currentMonthDays={currentMonthDays}
         changeMonth={changeMonth}
