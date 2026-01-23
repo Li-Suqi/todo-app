@@ -20,10 +20,10 @@ const TodoMain = ({
   };
 
   return (
-    <main className="flex-1 flex flex-col bg-white">
+    <main className="flex-1 flex flex-col bg-white dark:bg-dark-500">
       {/* header: show date */}
       <header className="p-8 pb-4">
-        <h1 className="text-2xl font-semibold text-slate-700">
+        <h1 className="text-2xl font-semibold text-slate-700 dark:text-textwhite">
           {new Date(selectedDate).toLocaleDateString("en-US", {
             month: "long",
             day: "numeric",
@@ -40,7 +40,7 @@ const TodoMain = ({
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="add a new task"
-            className="flex-1 bg-slate-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-100 outline-none transition-all placeholder:text-slate-300"
+            className="flex-1 bg-slate-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-100 outline-none transition-all placeholder:text-slate-300 dark:bg-dark-400 dark:text-textwhite"
           />
           <button
             type="submit"

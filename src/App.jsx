@@ -27,6 +27,13 @@ const App = () => {
     return savedTodos ? JSON.parse(savedTodos) : [];
   });
 
+  const [isDark, setIsDark] = useState(() => {
+    // initialize: if not localStorage, same with system
+    const saved = localStorage.getItem("theme");
+    if (saved) return saved === "dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
+
   // save achive automatically: when todos changes
   useEffect(() => {
     localStorage.setItem("my_todo_list", JSON.stringify(todos));
@@ -35,6 +42,17 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem("user_profile", JSON.stringify(profile));
   }, [profile]);
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (isDark) {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDark]);
 
   const addTodo = (text) => {
     const newTodo = {
@@ -98,6 +116,8 @@ const App = () => {
             setSelectedDate={setSelectedDate}
             profile={profile}
             setProfile={setProfile}
+            isDark={isDark}
+            setIsDark={setIsDark}
           />
           <TodoMain
             todos={filteredTodos}

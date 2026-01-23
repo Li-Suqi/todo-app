@@ -13,7 +13,7 @@ const Heatmap = ({
   const firstDayOfMonth = new Date(
     viewDate.getFullYear(),
     viewDate.getMonth(),
-    1
+    1,
   ).getDay(); // get the day of the week
 
   // null array as placeholders
@@ -22,7 +22,7 @@ const Heatmap = ({
   return (
     <div className="p-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-slate-800 font-bold text-sm">
+        <h3 className="text-slate-800 font-bold text-sm dark:text-textwhite">
           {viewDate.toLocaleDateString("en-US", {
             month: "short",
             year: "numeric",
@@ -93,9 +93,9 @@ const Heatmap = ({
               key={day}
               title={day} // hover to show date
               onClick={() => setSelectedDate(day)}
-              className={`w-5.5 h-5.5 mt-1.5 rounded-full transition-all duration-300  cursor-pointer ${getLevelClass(
+              className={`w-5.5 h-5.5 mt-1.5 rounded-full transition-all duration-300  cursor-pointer dark:bg-dark-200 ${getLevelClass(
                 day,
-                todos
+                todos,
               )} ${
                 isSelected
                   ? "ring-2 ring-amber-400 scale-110 shadow-lg" // selected

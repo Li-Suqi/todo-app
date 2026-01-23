@@ -12,7 +12,7 @@ const TodoItem = ({ todo, toggleTodo, deleteTodo, updateTodo }) => {
   };
 
   return (
-    <div className="flex items-center p-4 bg-slate-50 rounded-2xl group transition-all hover:bg-slate-100/80 border border-transparent hover:border-amber-100">
+    <div className="flex items-center p-4 bg-slate-50 rounded-2xl group transition-all hover:bg-slate-100/80 border border-transparent hover:border-amber-100 dark:bg-dark-300 dark:hover:bg-dark-400 dark:hover:border-amber-200">
       {/* checkbox */}
       <input
         type="checkbox"
@@ -26,7 +26,7 @@ const TodoItem = ({ todo, toggleTodo, deleteTodo, updateTodo }) => {
         {isEditing ? (
           <input
             autoFocus
-            className="w-full bg-white border border-amber-200 rounded-lg px-2 py-1 outline-none shadow-inner text-slate-700"
+            className="w-full bg-white border border-amber-200 rounded-lg px-2 py-1 outline-none shadow-inner text-slate-700 dark:bg-dark-200 dark:border-amber-300 dark:text-textwhite"
             value={editText}
             onChange={(e) => setEditText(e.target.value)}
             onBlur={handleUpdate}
@@ -40,7 +40,7 @@ const TodoItem = ({ todo, toggleTodo, deleteTodo, updateTodo }) => {
         ) : (
           <span // double click to edit
             onDoubleClick={() => setIsEditing(true)}
-            className={`ml-4 flex-1 text-slate-700 ${
+            className={`ml-4 flex-1 text-slate-700 dark:text-slate-100 ${
               todo.completed ? "line-through text-slate-400" : ""
             }`}
           >

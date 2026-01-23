@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+/* use dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-dark-600: #131314;
+  --color-dark-500: #1b1b1b;
+  --color-dark-400: #3f3f3f;
+  --color-dark-300: #565656;
+  --color-dark-200: #717171;
+  --color-dark-100: #8b8b8b;
+  --color-textwhite: #fcfcfc;
+  --color-dark-line: #454746;
+}
+
+*,
+*::before,
+*::after {
+  /* ensure dark mode and light mode change smoothly */
+  transition-property:
+    color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}

@@ -65,7 +65,7 @@ const Profile = ({ profile, setProfile }) => {
           )}
         </div>
         {/* hover text */}
-        <div className="absolute inset-0 bg-amber-400/60 rounded-full flex items-center justify-center text-white text-[10px] text-center px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+        <div className="absolute inset-0 bg-amber-400/60 rounded-full flex items-center justify-center text-white text-[10px] text-center px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none dark:bg-amber-400">
           use a new image
         </div>
         {/* update button (hidden) */}
@@ -82,7 +82,7 @@ const Profile = ({ profile, setProfile }) => {
         {isEditingName ? (
           <input
             autoFocus
-            className="text-center rounded-2xl font-bold text-slate-800 text-base bg-amber-50 outline-none w-full"
+            className="text-center rounded-2xl font-bold text-slate-800 text-base bg-amber-50 outline-none w-full dark:bg-dark-400 dark:text-textwhite"
             value={profile.nickname}
             onChange={(e) =>
               setProfile({ ...profile, nickname: e.target.value })
@@ -93,7 +93,7 @@ const Profile = ({ profile, setProfile }) => {
         ) : (
           <h2
             onDoubleClick={() => setIsEditingName(true)}
-            className="font-bold text-slate-800 text-base cursor-pointer hover:text-amber-400"
+            className="font-bold text-slate-800 text-base cursor-pointer hover:text-amber-400 dark:text-textwhite"
             title="Double click to change"
           >
             {profile.nickname}
@@ -106,7 +106,7 @@ const Profile = ({ profile, setProfile }) => {
         {isEditingBio ? (
           <input
             autoFocus
-            className="mt-1 text-[14px] rounded-2xl text-start text-slate-600 bg-amber-50 outline-none w-50 pl-2.5 pr-2.5"
+            className="mt-1 text-[14px] rounded-2xl text-start text-slate-600 bg-amber-50 outline-none w-50 pl-2.5 pr-2.5 dark:bg-dark-400 dark:text-textwhite"
             value={profile.bio}
             onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
             onBlur={() => setIsEditingBio(false)}

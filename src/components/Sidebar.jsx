@@ -3,6 +3,23 @@ import Heatmap from "./Heatmap";
 import DataList from "./DateList";
 import { formatLocalDate } from "../utils";
 import Profile from "./Profile";
+import darkModeIcon from "../assets/dark_mode.svg";
+import lightModeIcon from "../assets/light_mode.svg";
+
+const ThemeToggle = ({ isDark, setIsDark }) => {
+  return (
+    <button
+      onClick={() => setIsDark(!isDark)}
+      className="flex items-center ml-4 mb-2 pl-4.5 rounded-full hover:bg-slate-100 dark:hover:bg-dark-400 transition-colors w-15 h-15"
+    >
+      <img
+        src={isDark ? lightModeIcon : darkModeIcon}
+        alt="theme-toggle"
+        className="w-6 h-6" // 控制 SVG 大小
+      />
+    </button>
+  );
+};
 
 const Sidebar = ({
   todos,
@@ -10,6 +27,8 @@ const Sidebar = ({
   setSelectedDate,
   profile,
   setProfile,
+  isDark,
+  setIsDark,
 }) => {
   const [viewDate, setViewDate] = useState(new Date()); // current month on the top of sidebar, today default
 
@@ -51,7 +70,7 @@ const Sidebar = ({
   };
 
   return (
-    <aside className="w-80 border-r border-slate-300 flex flex-col">
+    <aside className="w-80 border-r border-slate-300 flex flex-col dark:border-dark-line">
       <Profile profile={profile} setProfile={setProfile} />
       <Heatmap
         currentMonthDays={currentMonthDays}
@@ -67,6 +86,7 @@ const Sidebar = ({
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
       />
+      <ThemeToggle isDark={isDark} setIsDark={setIsDark} />
     </aside>
   );
 };
