@@ -20,7 +20,7 @@ const Heatmap = ({
   const blanks = Array(firstDayOfMonth).fill(null);
 
   return (
-    <div className="p-6">
+    <div className="p-6 pt-2 pb-4">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-slate-800 font-bold text-sm dark:text-textwhite">
           {viewDate.toLocaleDateString("en-US", {

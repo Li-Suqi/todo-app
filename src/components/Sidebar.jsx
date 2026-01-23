@@ -10,12 +10,12 @@ const ThemeToggle = ({ isDark, setIsDark }) => {
   return (
     <button
       onClick={() => setIsDark(!isDark)}
-      className="flex items-center ml-4 mb-2 pl-4.5 rounded-full hover:bg-slate-100 dark:hover:bg-dark-400 transition-colors w-15 h-15"
+      className="flex items-center m-2 pl-2 rounded-full hover:bg-slate-100 dark:hover:bg-dark-400 transition-colors w-10 h-10"
     >
       <img
         src={isDark ? lightModeIcon : darkModeIcon}
         alt="theme-toggle"
-        className="w-6 h-6" // 控制 SVG 大小
+        className="w-6 h-6" // control size
       />
     </button>
   );

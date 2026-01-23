@@ -21,7 +21,7 @@ const DateList = ({ todos, selectedDate, setSelectedDate }) => {
             <div
               key={date}
               onClick={() => setSelectedDate(date)}
-              className={`flex items-center justify-between p-4 rounded-2xl cursor-pointer transition-all group
+              className={`flex items-center justify-between p-2 rounded-2xl cursor-pointer transition-all group
                   ${
                     isSelected
                       ? "bg-amber-50 border-amber-200 shadow-sm dark:bg-dark-400" // selected

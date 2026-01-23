@@ -48,7 +48,7 @@ const Profile = ({ profile, setProfile }) => {
   };
 
   return (
-    <div className="p-6 pb-0 flex flex-col items-center">
+    <div className="p-6 pb-0 flex">
       {/* avatar */}
       <div className="relative group w-15 h-15 mb-4">
         <div className="w-full h-full rounded-full bg-slate-100 overflow-hidden border-2 border-amber-100 group-hover:border-amber-400 transition-all shadow-sm">
@@ -77,50 +77,53 @@ const Profile = ({ profile, setProfile }) => {
         />
       </div>
 
-      {/* nickname */}
-      <div>
-        {isEditingName ? (
-          <input
-            autoFocus
-            className="text-center rounded-2xl font-bold text-slate-800 text-base bg-amber-50 outline-none w-full dark:bg-dark-400 dark:text-textwhite"
-            value={profile.nickname}
-            onChange={(e) =>
-              setProfile({ ...profile, nickname: e.target.value })
-            }
-            onBlur={() => setIsEditingName(false)}
-            onKeyDown={(e) => e.key === "Enter" && setIsEditingName(false)}
-          />
-        ) : (
-          <h2
-            onDoubleClick={() => setIsEditingName(true)}
-            className="font-bold text-slate-800 text-base cursor-pointer hover:text-amber-400 dark:text-textwhite"
-            title="Double click to change"
-          >
-            {profile.nickname}
-          </h2>
-        )}
-      </div>
+      {/* nickname and bio */}
+      <div className="flex flex-col ml-5 mt-1.5">
+        {/* nickname */}
+        <div>
+          {isEditingName ? (
+            <input
+              autoFocus
+              className="text-start pl-3 rounded-2xl font-bold text-slate-800 text-base bg-amber-50 outline-none w-30 dark:bg-dark-400 dark:text-textwhite"
+              value={profile.nickname}
+              onChange={(e) =>
+                setProfile({ ...profile, nickname: e.target.value })
+              }
+              onBlur={() => setIsEditingName(false)}
+              onKeyDown={(e) => e.key === "Enter" && setIsEditingName(false)}
+            />
+          ) : (
+            <h2
+              onDoubleClick={() => setIsEditingName(true)}
+              className="font-bold text-slate-800 text-base cursor-pointer hover:text-amber-400 dark:text-textwhite"
+              title="Double click to change"
+            >
+              {profile.nickname}
+            </h2>
+          )}
+        </div>
 
-      {/* bio */}
-      <div>
-        {isEditingBio ? (
-          <input
-            autoFocus
-            className="mt-1 text-[14px] rounded-2xl text-start text-slate-600 bg-amber-50 outline-none w-50 pl-2.5 pr-2.5 dark:bg-dark-400 dark:text-textwhite"
-            value={profile.bio}
-            onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
-            onBlur={() => setIsEditingBio(false)}
-            onKeyDown={(e) => e.key === "Enter" && setIsEditingBio(false)}
-          />
-        ) : (
-          <p
-            onDoubleClick={() => setIsEditingBio(true)}
-            className="text-[14px] text-slate-400 mt-1 text-center line-clamp-2 px-2"
-            title="Double click to change"
-          >
-            {profile.bio}
-          </p>
-        )}
+        {/* bio */}
+        <div>
+          {isEditingBio ? (
+            <input
+              autoFocus
+              className="mt-1 text-[14px] rounded-2xl text-start text-slate-600 bg-amber-50 outline-none w-47 pl-2.5 pr-2.5 dark:bg-dark-400 dark:text-textwhite"
+              value={profile.bio}
+              onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
+              onBlur={() => setIsEditingBio(false)}
+              onKeyDown={(e) => e.key === "Enter" && setIsEditingBio(false)}
+            />
+          ) : (
+            <p
+              onDoubleClick={() => setIsEditingBio(true)}
+              className="text-[14px] text-slate-400 mt-1 text-start line-clamp-2 w-47"
+              title="Double click to change"
+            >
+              {profile.bio}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
