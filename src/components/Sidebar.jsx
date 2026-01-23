@@ -60,10 +60,13 @@ const Sidebar = ({
 
   const currentMonthDays = getDaysInMonth(viewDate);
 
-  const getLevelClass = (date, todos) => {
+  const getLevelClass = (date, todos, isDark) => {
     const count = todos.filter((t) => t.date === date && t.completed).length;
 
-    if (count === 0) return "bg-slate-100";
+    if (count === 0) {
+      if (isDark) return "bg-dark-400";
+      else return "bg-slate-100";
+    }
     if (count >= 1 && count <= 2) return "bg-amber-200";
     if (count >= 3 && count <= 4) return "bg-amber-400";
     return "bg-amber-500";
@@ -80,6 +83,7 @@ const Sidebar = ({
         setSelectedDate={setSelectedDate}
         selectedDate={selectedDate}
         viewDate={viewDate}
+        isDark={isDark}
       />
       <DataList
         todos={todos}

@@ -8,6 +8,7 @@ const Heatmap = ({
   selectedDate,
   setSelectedDate,
   viewDate,
+  isDark,
 }) => {
   // get weekday of 1st of the month
   const firstDayOfMonth = new Date(
@@ -93,9 +94,10 @@ const Heatmap = ({
               key={day}
               title={day} // hover to show date
               onClick={() => setSelectedDate(day)}
-              className={`w-5.5 h-5.5 mt-1.5 rounded-full transition-all duration-300  cursor-pointer dark:bg-dark-200 ${getLevelClass(
+              className={`w-5.5 h-5.5 mt-1.5 rounded-full transition-all duration-300  cursor-pointer ${getLevelClass(
                 day,
                 todos,
+                isDark,
               )} ${
                 isSelected
                   ? "ring-2 ring-amber-400 scale-110 shadow-lg" // selected
